@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "RAG Chatbot API",
+    "description": "Complete API collection for testing the Advanced RAG Chatbot System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "SESSION_ID",
+      "value": "test-session-{{$randomUUID}}",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/health",
+          "host": ["{{BASE_URL}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the API is running and all components are initialized"
+      }
+    },
+    {
+      "name": "2. System Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/stats",
+          "host": ["{{BASE_URL}}"],
+          "path": ["stats"]
+        },
+        "description": "Get detailed statistics about LLM, RAG, and conversation systems"
+      }
+    },
+    {
+      "name": "3. General Chat - Simple Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is machine learning?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/general",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "general"]
+        },
+        "description": "Ask a general question using the base LLM (Task 1)"
+      }
+    },
+    {
+      "name": "4. General Chat - Follow-up Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"Can you give me an example?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/general",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "general"]
+        },
+        "description": "Follow-up question to test conversation context"
+      }
+    },
+    {
+      "name": "5. CV Chat - Skills Query",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What are my technical skills?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/cv",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "cv"]
+        },
+        "description": "Query CV for technical skills using Advanced RAG (Task 2)"
+      }
+    },
+    {
+      "name": "6. CV Chat - Experience Query",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What is my work experience?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/cv",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "cv"]
+        },
+        "description": "Query CV for work experience"
+      }
+    },
+    {
+      "name": "7. CV Chat - Education Query",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"Tell me about my education background\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/cv",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "cv"]
+        },
+        "description": "Query CV for education information"
+      }
+    },
+    {
+      "name": "8. CV Chat - Projects Query",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"What projects have I worked on?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/cv",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "cv"]
+        },
+        "description": "Query CV for project information"
+      }
+    },
+    {
+      "name": "9. CV Chat - Specific Technology",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"Do I have experience with Python and FastAPI?\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/cv",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "cv"]
+        },
+        "description": "Query for specific technologies in CV"
+      }
+    },
+    {
+      "name": "10. Get Conversation History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/chat/history/{{SESSION_ID}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "history", "{{SESSION_ID}}"]
+        },
+        "description": "Retrieve full conversation history for the session (Task 3)"
+      }
+    },
+    {
+      "name": "11. Clear Conversation History",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/chat/history/{{SESSION_ID}}",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "history", "{{SESSION_ID}}"]
+        },
+        "description": "Clear conversation history for the session"
+      }
+    },
+    {
+      "name": "12. Test Multiple Conversations",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"Question {{$randomInt}}\",\n  \"session_id\": \"{{SESSION_ID}}\"\n}"
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/chat/general",
+          "host": ["{{BASE_URL}}"],
+          "path": ["chat", "general"]
+        },
+        "description": "Run this multiple times to test conversation history limit (10 Q&A pairs)"
+      }
+    }
+  ]
+}
