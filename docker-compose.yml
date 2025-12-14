@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Main RAG Chatbot API
   rag-api:
     build:
       context: .
@@ -10,44 +9,34 @@ services:
     ports:
       - "${API_PORT:-8000}:8000"
     environment:
-      # LLM Configuration
       - LLM_PROVIDER=${LLM_PROVIDER:-groq}
       - GROQ_API_KEY=${GROQ_API_KEY}
       - GROQ_MODEL=${GROQ_MODEL:-llama-3.1-8b-instant}
       - OLLAMA_BASE_URL=http://ollama:11434
       - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2:3b}
       
-      # Embedding & Re-ranking
       - EMBEDDING_MODEL=${EMBEDDING_MODEL:-sentence-transformers/all-MiniLM-L6-v2}
       - RERANKER_MODEL=${RERANKER_MODEL:-cross-encoder/ms-marco-MiniLM-L-6-v2}
       
-      # Vector Database
       - CHROMA_PERSIST_DIR=/app/vector_store
       - COLLECTION_NAME=${COLLECTION_NAME:-cv_documents}
       
-      # RAG Configuration
       - CHUNK_SIZE=${CHUNK_SIZE:-500}
       - CHUNK_OVERLAP=${CHUNK_OVERLAP:-50}
       - TOP_K_RETRIEVAL=${TOP_K_RETRIEVAL:-10}
       - TOP_K_RERANK=${TOP_K_RERANK:-3}
       
-      # Conversation
       - MAX_CONVERSATION_HISTORY=${MAX_CONVERSATION_HISTORY:-10}
       
-      # API Configuration
       - API_HOST=0.0.0.0
       - API_PORT=8000
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       
-      # CV Path
       - CV_PATH=/app/data/cv.pdf
     
     volumes:
-      # Persist vector store
       - ./vector_store:/app/vector_store
-      # Mount CV file
       - ./data:/app/data:ro
-      # Logs
       - ./logs:/app/logs
     
     restart: unless-stopped
@@ -61,32 +50,6 @@ services:
     
     networks:
       - rag-network
-    
-    # Optional: Depends on Ollama if using local LLM
-    # Uncomment the line below if LLM_PROVIDER=ollama
-    # depends_on:
-    #   - ollama
-
-  # Optional: Ollama service for local LLM
-  # Uncomment this entire service if you want to use Ollama instead of Groq
-  # ollama:
-  #   image: ollama/ollama:latest
-  #   container_name: ollama-server
-  #   ports:
-  #     - "11434:11434"
-  #   volumes:
-  #     - ollama-data:/root/.ollama
-  #   restart: unless-stopped
-  #   networks:
-  #     - rag-network
-  #   # GPU support (if available)
-  #   # deploy:
-  #   #   resources:
-  #   #     reservations:
-  #   #       devices:
-  #   #         - driver: nvidia
-  #   #           count: 1
-  #   #           capabilities: [gpu]
 
 networks:
   rag-network:
