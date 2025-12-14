@@ -1,38 +1,29 @@
-# Core API Framework
 fastapi
 uvicorn[standard]
 pydantic
 pydantic-settings
 
-# LLM & AI
 langchain
 langchain-community
 openai
 groq
 
-# Embeddings & Vector Store
 sentence-transformers
 chromadb
 transformers
 torch
 
-# RAG Enhancements
 rank-bm25  # For BM25 keyword search
 
-# Document Processing
 pypdf2
 python-multipart
 
-# Utilities
 python-dotenv
 loguru
 httpx
 aiofiles
 
-# Testing
 pytest
 pytest-asyncio
 httpx
 
-# Optional: For cross-encoder reranking
-# Using sentence-transformers which includes cross-encoder support
