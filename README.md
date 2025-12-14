@@ -1,6 +1,3 @@
-# 🚀 Advanced RAG Chatbot System
-
-A production-ready **Retrieval-Augmented Generation (RAG)** chatbot with conversation context management, built with modern best practices.
 
 ## 📋 **Project Overview**
 
@@ -406,45 +403,7 @@ docker-compose ps
 
 ---
 
-## 🔍 **Troubleshooting**
 
-### **Issue: "CV not found" error**
-**Solution:** Ensure `cv.pdf` is in the `data/` directory
-
-### **Issue: Groq API errors**
-**Solution:** 
-- Verify your API key in `.env`
-- Check Groq API status: https://status.groq.com
-- Free tier limit: ~30 requests/minute
-
-### **Issue: Out of memory**
-**Solution:**
-- Reduce `TOP_K_RETRIEVAL` to 5
-- Reduce `CHUNK_SIZE` to 300
-- Increase Docker memory allocation
-
-### **Issue: Slow response times**
-**Solution:**
-- Use Groq instead of Ollama (faster inference)
-- Reduce `TOP_K_RETRIEVAL`
-- Disable query enhancement: `use_query_enhancement=False`
-
----
-
-## 🧪 **Running Tests**
-
-```bash
-# Install test dependencies
-pip install pytest pytest-asyncio httpx
-
-# Run tests
-pytest tests/ -v
-
-# Run with coverage
-pytest tests/ --cov=modules --cov-report=html
-```
-
----
 
 ## 📝 **Development Notes**
 
@@ -483,36 +442,4 @@ pytest tests/ --cov=modules --cov-report=html
 
 ---
 
-## 📄 **License**
 
-This project is for evaluation purposes.
-
----
-
-## 👤 **Author**
-
-Your Name  
-[Your Email]  
-[Your LinkedIn]
-
----
-
-## 🙏 **Acknowledgments**
-
-- Groq for fast LLM inference
-- LangChain community for RAG patterns
-- Sentence Transformers for embeddings
-- Anthropic for Claude (used in development)
-
----
-
-## 📧 **Support**
-
-For questions or issues:
-1. Check the troubleshooting section
-2. Review API documentation at `/docs`
-3. Check logs: `docker-compose logs -f`
-
----
-
-**🎉 Ready to impress! Good luck with your evaluation!** 🚀
